@@ -50,36 +50,33 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="pastor.html">Pastor's Desk</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'pastor' %}">Pastor's Desk</a></li>
           <li><a class="nav-link scrollto o" href="#portfolio">CMC's Desk</a></li>
           <li><a class="nav-link scrollto" href="#team">Ushering</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">WSF Leaders Report</a></li>
+          <li><a class="nav-link scrollto" href="#pricing">WSF Leaders</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Media Team</a></li>
           
-          <li class="dropdown"><a href="#"><span>Workers</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Performance Page</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 
-              <li class="dropdown"><a href="#"><span>Pastor's Desk</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="#"><span>Pastor's Reports</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Pastor's Report</a></li>
-                  <li><a href="#">Updates</a></li>
-                  <li><a href="#">WSF</a></li>
-                  <li><a href="#">KAP</a></li>
-                  <li><a href="#">Church Reports</a></li>
+                  <li><a href="#">Pastor's Monthly Report</a></li>
+                  <li><a href="#">Service Reports</a></li>
+                  <li><a href="#">Financial Reports</a></li>
                 </ul>
               </li>
-              <li class="dropdown"><a href="#"><span>CMC's Desk</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="#"><span>CMC's Reports</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                     <li><a href="#">CMC Monthly Report</a></li>
                     <li><a href="#">CMC Financial Report</a></li>
-                    <li><a href="#">Church Reports</a></li>
+                    <li><a href="#">Service Reports</a></li>
                 </ul>
               </li>
-              <li><a href="#">Ushering</a></li>
+              <li><a href="#">Ushering Reports</a></li>
               
               <li><a href="#">WSF Leaders Report</a></li>
-              <li><a href="#">Media Team</a></li>
             </ul>
           </li>
           <li><a class="getstarted scrollto" href="#about">Logout</a></li>

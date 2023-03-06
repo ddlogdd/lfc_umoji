@@ -50,12 +50,22 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#services">Pastor's Report</a></li>
-          <li><a class="nav-link scrollto o" href="#portfolio">Updates</a></li>
-          <li><a class="nav-link scrollto" href="#team">WSF</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">WSF KAP</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Church Reports</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'workers' %}">Workers_page</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'info_update' %}">Info_updates</a></li>
+          <li><a class="nav-link scrollto o" href="#portfolio">wsf</a></li>
+          <li><a class="nav-link scrollto" href="#team">kap</a></li>
+          
+          <li class="dropdown"><a href="#"><span>Pastor Information Page</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+
+              <li class="dropdown"><a href="#"><span>Pastor Information Page</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#"> Monthly Information</a></li>
+                  <li><a href="#">Service Information</a></li>
+                  <li><a href="#">Financial Information</a></li>
+                </ul>
+              </li>
           <li><a class="getstarted scrollto" href="#about">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

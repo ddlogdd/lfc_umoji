@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Announcements{% endblock title %}
+{% block content %}
+    {% for umoji in object_list %}
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
+                <span class="text-muted">by {{ umoji.author }}|</span>
+            </div>
+            <div class="card-body">
+            {{ umoji.body }}
+            </div>
+            <div class="card-footer text-center text-muted">
+            <a href="#">Edit</a> | <a href="#">Delete</a>
+            </div>
+        </div>
+        <br />
+    </section>
+
+{% endfor %}
+{% endblock content %}
