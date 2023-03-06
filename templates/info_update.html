@@ -1,0 +1,9 @@
+{% extends 'pastor_desk.html' %}
+{% block content %}
+<section>
+    <h1>New Announcement</h1>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success ml-Ǒ" type="submit">Save</button>
+</section>
+{% endblock content %}
