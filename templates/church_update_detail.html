@@ -1,0 +1,24 @@
+{% extends 'workers.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <p>by</p> {{church.author }} | {{church.date }}
+        <p><b>Total Sunday Attendance:</b></p>{{ church.total_sunday_attendance }}
+        <p><b>Average Sunday Attendance:</b></p>{{ church.avg_sunday_attendance }}
+        <p><b>Highest Sunday Attendance:</b></p>{{ church.highest_sunday_attendance }}
+        <p><b>Average Numer of Adults:</b></p>{{ church.avg_adults }}
+        <p><b>Average Number of Children:</b></p>{{ church.avg_children }}
+        <p><b>Average Chop Attendance:</b></p>{{ church.number_of_children }}
+        <p><b>Average WSF Attendance:</b></p>{{ church.avg_chop }}
+        <p><b>Total Believers Foundation Class Attendance:</b></p>{{ church.bfc }}
+        <p><b>Number of WSF Centres:</b></p>{{ church.no_of_wsf }}
+        <p><b>Number of First Timers:</b></p>{{ church.first_timers }}
+        <p><b>Number of New Converts:</b></p>{{ church.new_converts }}
+        <p><b>Total Income:</b></p>{{ church.Total_income }}
+        <p><b>Pastors's Comment:</b></p>{{ church.body }}
+    
+    <p><a href="{% url 'church_update_edit' church.pk %}">Edit</a> |
+        <a href="{% url 'church_update_delete' church.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'church_report' %}">Church Report</a>.</p>
+</section>
+{% endblock content %}

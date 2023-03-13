@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <h2>{{ announcement.title }}</h2>
+            <p>by {{ announcement.author }} | {{ announcement.date }}</p>
+            <h2>Details:</h2><p>{{ announcement.body }}</p>
+    </div>
+    
+    <p><a href="{% url 'info_update_edit' announcement.pk %}">Edit</a> |
+        <a href="{% url 'info_update_delete' announcement.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'announcements' %}">Announcements</a>.</p>
+</section>
+{% endblock content %}
+

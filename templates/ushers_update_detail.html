@@ -1,0 +1,39 @@
+{% extends 'workers.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <p>by</p> {{ servicereport.author }} | {{ servicereport.date }}
+        <p><b>Message Title:</b></p>{{ servicereport.message_title }}
+        <p><b>Service Sequence:</b></p>{{ servicereport.service_sequence}}
+        <p><b>Number of Males:</b></p>{{ servicereport.number_of_males }}
+        <p><b>Number of Females:</b></p>{{ servicereport.number_of_females }}
+        <p><b>Number of Children:</b></p>{{ servicereport.number_of_children }}
+        <p><b>Number of First Timers:</b></p>{{ servicereport.number_of_first_timers }}
+        <p><b>Number of New Converts:</b></p>{{ servicereport.number_of_new_converts }}
+        <p><b>Number of New Cars:</b></p>{{ servicereport.number_of_cars }}
+        <p><b>Total Attendance:</b></p>{{ servicereport.Total_attendace }}
+        <p><b>Income Report:</b></p>{{ servicereport.Income_report }}
+        <p><b>Usher's Comment:</b></p>{{ servicereport.body }}
+    </div>
+    
+    <p><a href="{% url 'ushers_update_edit' servicereport.pk %}">Edit</a> |
+        <a href="{% url 'ushers_update_delete' servicereport.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'ushers_report' %}">Ushers Report</a>.</p>
+</section>
+{% endblock content %}
+
+body = models.TextField()
+Income_report = models.TextField()
+message_title = models.CharField(max_length=40)
+service_sequence = models.CharField(max_length=3)
+number_of_males = models.CharField(max_length=10)
+number_of_females = models.CharField(max_length=10)
+number_of_children = models.CharField(max_length=10)
+number_of_first_timers = models.CharField(max_length=10)
+number_of_new_converts = models.CharField(max_length=10)
+number_of_cars = models.CharField(max_length=10)
+Total_attendace = models.CharField(max_length=10)
+date = models.DateTimeField(auto_now_add=True)
+author = models.ForeignKey(
+get_user_model(),
+on_delete=models.CASCADE, 

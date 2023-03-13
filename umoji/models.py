@@ -1,6 +1,6 @@
 from django.db import models
 
-# articles/models.py
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -16,7 +16,8 @@ class Announcement(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('announcements')
+        return reverse('info_update_detail',  args=[str(self.id)])
+        
 
 class Wsf(models.Model):
     title = models.CharField(max_length=200)
@@ -30,7 +31,7 @@ class Wsf(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('wsf_update_detail', args=[str(self.id)])
 
 class Kap(models.Model):
     title = models.CharField(max_length=200)
@@ -44,29 +45,29 @@ class Kap(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('kap_update_detail', args=[str(self.id)])
 
 class ServiceReport(models.Model):
     body = models.TextField()
     Income_report = models.TextField()
     message_title = models.CharField(max_length=40)
-    service_sequence = models.CharField(max_length=3)
-    number_of_males = models.CharField(max_length=10)
-    number_of_females = models.CharField(max_length=10)
-    number_of_children = models.CharField(max_length=10)
-    number_of_first_timers = models.CharField(max_length=10)
-    number_of_new_converts = models.CharField(max_length=10)
-    number_of_cars = models.CharField(max_length=10)
-    Total_attendace = models.CharField(max_length=10)
+    service_sequence = models.IntegerField()
+    number_of_males = models.IntegerField()
+    number_of_females = models.IntegerField()
+    number_of_children = models.IntegerField()
+    number_of_first_timers = models.IntegerField()
+    number_of_new_converts = models.IntegerField()
+    number_of_cars = models.IntegerField()
+    Total_attendace = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
     get_user_model(),
-    on_delete=models.CASCADE,
+    on_delete=models.CASCADE, 
     )
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('ushers_update_detail', args=[str(self.id)])
 
 class ManagementReport(models.Model):
     title = models.CharField(max_length=200)
@@ -74,14 +75,14 @@ class ManagementReport(models.Model):
     Income_report = models.TextField()
     service_unit = models.CharField(max_length=40)
     message_title = models.CharField(max_length=40)
-    service_sequence = models.CharField(max_length=3)
-    number_of_males = models.CharField(max_length=10)
-    number_of_females = models.CharField(max_length=10)
-    number_of_children = models.CharField(max_length=10)
-    number_of_first_timers = models.CharField(max_length=10)
-    number_of_new_converts = models.CharField(max_length=10)
-    number_of_cars = models.CharField(max_length=10)
-    Total_attendace = models.CharField(max_length=10)
+    service_sequence = models.IntegerField()
+    number_of_males = models.IntegerField()
+    number_of_females = models.IntegerField()
+    number_of_children = models.IntegerField()
+    number_of_first_timers = models.IntegerField()
+    number_of_new_converts = models.IntegerField()
+    number_of_cars = models.IntegerField()
+    Total_attendace = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
     get_user_model(),
@@ -90,18 +91,18 @@ class ManagementReport(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('cmc_update_detail', args=[str(self.id)])   
 
 class WsfLeaders(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     wsf_centre_name = models.CharField(max_length=40)
-    number_of_males = models.CharField(max_length=10)
-    number_of_females = models.CharField(max_length=10)
-    number_of_children = models.CharField(max_length=10)
-    number_of_first_timers = models.CharField(max_length=10)
-    number_of_new_converts = models.CharField(max_length=10)
-    Total_attendace = models.CharField(max_length=10)
+    number_of_males = models.IntegerField()
+    number_of_females = models.IntegerField()
+    number_of_children = models.IntegerField()
+    number_of_first_timers = models.IntegerField()
+    number_of_new_converts = models.IntegerField()
+    Total_attendace = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
     get_user_model(),
@@ -110,7 +111,7 @@ class WsfLeaders(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('wsfleaders_update_detail', args=[str(self.id)])  
 
 class Media(models.Model):
     title = models.CharField(max_length=200)
@@ -124,4 +125,29 @@ class Media(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse('article_detail', args=[str(self.id)])
+        return reverse('media_update_detail', args=[str(self.id)])
+
+class Church(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    total_sunday_attendance = models.IntegerField()
+    avg_sunday_attendance = models.IntegerField()
+    avg_adults = models.IntegerField()
+    avg_children = models.IntegerField()
+    avg_chop = models.IntegerField()
+    avg_wsf = models.IntegerField()
+    no_of_wsf = models.IntegerField()
+    bfc = models.IntegerField()
+    highest_sunday_attendance = models.IntegerField()
+    first_timers = models.IntegerField()
+    new_converts = models.IntegerField()
+    Total_income = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(
+    get_user_model(),
+    on_delete=models.CASCADE,
+    )
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse('church_update_detail', args=[str(self.id)])  

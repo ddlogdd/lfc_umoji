@@ -1,9 +1,10 @@
-{% extends 'pastor_desk.html' %}
+{% extends 'workers.html' %}
 {% block content %}
 <section>
-    <h1>New Announcement</h1>
+    <h1>Edit</h1>
     <form action="" method="post">{% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-success ml-2" type="submit">Save</button>
+        <button class="btn btn-info ml-2" type="submit">Update</button>
+    </form>
 </section>
 {% endblock content %}

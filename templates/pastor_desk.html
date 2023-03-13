@@ -53,20 +53,15 @@
           <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'workers' %}">Workers_page</a></li>
           <li><a class="nav-link scrollto" href="{% url 'info_update' %}">Info_updates</a></li>
-          <li><a class="nav-link scrollto o" href="#portfolio">wsf</a></li>
-          <li><a class="nav-link scrollto" href="#team">kap</a></li>
+          <li><a class="nav-link scrollto o" href="{% url 'wsf_update' %}">wsf_update</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'kap_update' %}">kap_update</a></li>
           
-          <li class="dropdown"><a href="#"><span>Pastor Information Page</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="{% url 'church_update' %}"><span> Church Monthly Report</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 
               <li class="dropdown"><a href="#"><span>Pastor Information Page</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#"> Monthly Information</a></li>
-                  <li><a href="#">Service Information</a></li>
-                  <li><a href="#">Financial Information</a></li>
-                </ul>
               </li>
-          <li><a class="getstarted scrollto" href="#about">Logout</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

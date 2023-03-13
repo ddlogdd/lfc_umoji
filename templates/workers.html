@@ -52,34 +52,31 @@
         <ul>
           <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'pastor' %}">Pastor's Desk</a></li>
-          <li><a class="nav-link scrollto o" href="#portfolio">CMC's Desk</a></li>
-          <li><a class="nav-link scrollto" href="#team">Ushering</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">WSF Leaders</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Media Team</a></li>
+          <li><a class="nav-link scrollto o" href="{% url 'cmc_update' %}">CMC's Desk</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'ushers_update' %}">Ushering</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'wsf_leaders_update' %}">WSF Leaders</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'media_update' %}">Media Team</a></li>
           
           <li class="dropdown"><a href="#"><span>Performance Page</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 
               <li class="dropdown"><a href="#"><span>Pastor's Reports</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Pastor's Monthly Report</a></li>
-                  <li><a href="#">Service Reports</a></li>
-                  <li><a href="#">Financial Reports</a></li>
+                  <li><a href="{% url 'church_report' %}">Pastor's Monthly Report</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>CMC's Reports</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                    <li><a href="#">CMC Monthly Report</a></li>
-                    <li><a href="#">CMC Financial Report</a></li>
-                    <li><a href="#">Service Reports</a></li>
+                    <li><a href="{% url 'cmc_report' %}">CMC  Report</a></li>
                 </ul>
               </li>
-              <li><a href="#">Ushering Reports</a></li>
+              <li><a href="{% url 'ushers_report' %}">Ushering Reports</a></li>
               
-              <li><a href="#">WSF Leaders Report</a></li>
+              <li><a href="{% url 'wsf_report' %}">WSF Report</a></li>
+              <li><a href="http://127.0.0.1:8000/admin">Admin</a></li>
             </ul>
           </li>
-          <li><a class="getstarted scrollto" href="#about">Logout</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -88,6 +85,18 @@
   </header><!-- End Header -->
 
   {% block content %}
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          {% if user.is_authenticated %}
+           <h1>Welcome</h1>  <h1>{{ user.username }}!</h1>
+          {% else %}
+            <h1>Log in</h1>
+          {% endif %} 
+        </div>
+      </div>
+
   {% endblock content %}
 
 

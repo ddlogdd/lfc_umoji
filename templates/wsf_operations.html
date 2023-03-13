@@ -1,7 +1,20 @@
-li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'updates' %}">Updatesr</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'wsf_updates' %}">Waf_Updates</a></li>
-                <li><a class="nav-link scrollto o" href="{% url 'kap_updates' %}">Kap_Updates</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'reports' %}">Reports</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'general_reports' %}">General_Reports</a></li>
-                <li><a class="getstarted scrollto" href="{% url 'signout' %}">signout</a></li>
+{% extends 'base.html' %}
+{% block title %}WsfOperations{% endblock title %}
+{% block content %}
+    {% for umoji in object_list %}
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
+                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+            </div>
+            <div class="card-body">
+            {{ umoji.body|truncatewords:20 }}
+                <a href="{% url 'wsf_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'wsf_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'wsf_update_detail' umoji.pk %}">click for complete post</a>
+            </div>
+        </div>
+        <br />
+    </section>
+
+{% endfor %}
+{% endblock content %}

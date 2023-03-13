@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <h2>{{ object.title }}</h2>
+            <p>by {{ object.author }} | {{ object.date }}</p>
+            <h2>Prayer Points</h2><p>{{ object.wsf_prayers }}</p>
+            <h2>Wsf Outline</h2><p>{{ object.wsf_outline }}</p>
+    </div>
+    
+    <p><a href="{% url 'wsf_update_edit' wsf.pk %}">Edit</a> |
+        <a href="{% url 'wsf_update_delete' wsf.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'wsf_operations' %}">wsf_operations</a>.</p>
+</section>
+{% endblock content %}
+
+

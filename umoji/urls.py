@@ -1,15 +1,62 @@
 from django.urls import path
-from .views import HomePageView, AnnouncementPageView, WorkersPageView, PastorPageView, CmcPageView, AboutUsPageView, InfoUpdatePageView
+from .views import (
+AnnouncementPageView, 
+WorkersPageView, PastorPageView, CmcPageView, AboutUsPageView, InfoUpdatePageView, InfoUpdateEditView, InfoUpdateDetailView,
+InfoUpdateDeleteView, WsfOperationsPageView, WsfUpdatePageView,WsfUpdateEditView,WsfUpdateDetailView,WsfUpdateDeleteView,
+KingdomAdvancementPrayersView,KapUpdatePageView,KapUpdateEditView,KapUpdateDetailView,KapUpdateDeleteView,
+TestimoniesView, MediaUpdatePageView, MediaUpdateEditView, MediaUpdateDetailView, MediaUpdateDeleteView,
+WsfReportView, WsfLeadersUpdatePageView, WsfLeadersUpdateEditView, WsfLeadersUpdateDetailView, WsfLeadersUpdateDeleteView, UshersReportView, 
+UshersUpdatePageView, UshersUpdateEditView, UshersUpdateDetailView, UshersUpdateDeleteView ,
+CmcReportView, CmcUpdatePageView, CmcUpdateEditView, CmcUpdateDetailView, CmcUpdateDeleteView,
+ChurchReportView, ChurchUpdatePageView, ChurchUpdateEditView, ChurchUpdateDetailView, ChurchUpdateDeleteView
+)
 
 urlpatterns = [
+    path('church/<int:pk>/delete/', ChurchUpdateDeleteView.as_view(), name='church_update_delete'),
+    path('church/<int:pk>/', ChurchUpdateDetailView.as_view(), name='church_update_detail'),
+    path('church/<int:pk>/edit/',ChurchUpdateEditView.as_view(), name='church_update_edit'),
+    path('church_update/', ChurchUpdatePageView.as_view(), name='church_update'),
+    path('church_report/', ChurchReportView.as_view(), name='church_report'),
+    path('managementreport/<int:pk>/delete/', CmcUpdateDeleteView.as_view(), name='cmc_update_delete'),
+    path('managementreport/<int:pk>/', CmcUpdateDetailView.as_view(), name='cmc_update_detail'),
+    path('managementreport/<int:pk>/edit/',CmcUpdateEditView.as_view(), name='cmc_update_edit'),
+    path('cmc_update/', CmcUpdatePageView.as_view(), name='cmc_update'),
+    path('cmc_report/', CmcReportView.as_view(), name='cmc_report'),
+    path('servicereport/<int:pk>/delete/', UshersUpdateDeleteView.as_view(), name='ushers_update_delete'),
+    path('servicereport/<int:pk>/', UshersUpdateDetailView.as_view(), name='ushers_update_detail'),
+    path('servicereport/<int:pk>/edit/',UshersUpdateEditView.as_view(), name='ushers_update_edit'),
+    path('ushers_update/', UshersUpdatePageView.as_view(), name='ushers_update'),
+    path('ushers_report/', UshersReportView.as_view(), name='ushers_report'),
+    path('wsfleaders/<int:pk>/delete/', WsfLeadersUpdateDeleteView.as_view(), name='wsfleaders_update_delete'),
+    path('wsfleaders/<int:pk>/', WsfLeadersUpdateDetailView.as_view(), name='wsfleaders_update_detail'),
+    path('wsfleaders/<int:pk>/edit/',WsfLeadersUpdateEditView.as_view(), name='wsfleaders_update_edit'),
+    path('wsf_leaders_update/', WsfLeadersUpdatePageView.as_view(), name='wsf_leaders_update'),
+    path('wsf_report/', WsfReportView.as_view(), name='wsf_report'),
+    path('media/<int:pk>/delete/', MediaUpdateDeleteView.as_view(), name='media_update_delete'),
+    path('media/<int:pk>/', MediaUpdateDetailView.as_view(), name='media_update_detail'),
+    path('media/<int:pk>/edit/',MediaUpdateEditView.as_view(), name='media_update_edit'),
+    path('media_update/', MediaUpdatePageView.as_view(), name='media_update'),
+    path('testimonies/', TestimoniesView.as_view(), name='testimonies'),
+    path('kap/<int:pk>/delete/', KapUpdateDeleteView.as_view(), name='kap_update_delete'),
+    path('kap/<int:pk>/', KapUpdateDetailView.as_view(), name='kap_update_detail'),
+    path('kap/<int:pk>/edit/',KapUpdateEditView.as_view(), name='kap_update_edit'),
+    path('kap_update/', KapUpdatePageView.as_view(), name='kap_update'),
+    path('kingdom_advancement_prayers/', KingdomAdvancementPrayersView.as_view(), name='kingdom_advancement_prayers'),
+    path('wsf/<int:pk>/delete/', WsfUpdateDeleteView.as_view(), name='wsf_update_delete'),
+    path('wsf/<int:pk>/', WsfUpdateDetailView.as_view(), name='wsf_update_detail'),
+    path('wsf/<int:pk>/edit/',WsfUpdateEditView.as_view(), name='wsf_update_edit'),
+    path('wsf_update/', WsfUpdatePageView.as_view(), name='wsf_update'),
+    path('wsf_operations/', WsfOperationsPageView.as_view(), name='wsf_operations'),
+    path('announcement/<int:pk>/delete/', InfoUpdateDeleteView.as_view(), name='info_update_delete'),
+    path('announcement/<int:pk>/', InfoUpdateDetailView.as_view(), name='info_update_detail'),
+    path('announcement/<int:pk>/edit/', InfoUpdateEditView.as_view(), name='info_update_edit'),
     path('info_update/', InfoUpdatePageView.as_view(), name='info_update'),
     path('about_us/', AboutUsPageView.as_view(), name='about_us'),
     path('cmc/', CmcPageView.as_view(), name='cmc'),
     path('pastor/', PastorPageView.as_view(), name='pastor'),
     path('workers/', WorkersPageView.as_view(), name='workers'),
     path('announcement/', AnnouncementPageView.as_view(), name='announcements'),
-    path('', HomePageView.as_view(), name='home'),
-    
+   
 ]
 
 

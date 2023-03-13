@@ -1,0 +1,22 @@
+{% extends 'workers.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <p><b>Title:</b></p>{{ wsfleaders.title }}
+        <p>by</p> {{ wsfleaders.author }} | {{ wsfleaders.date }}
+        <p><b>Wsf_Centre Name:</b></p>{{ wsfleaders.wsf_centre_name }}
+        <p><b>Number of Males:</b></p>{{ wsfleaders.number_of_males }}
+        <p><b>Number of Females:</b></p>{{ wsfleaders.number_of_females }}
+        <p><b>Number of Children:</b></p>{{ wsfleaders.number_of_children }}
+        <p><b>Number of First Timers:</b></p>{{ wsfleaders.number_of_first_timers }}
+        <p><b>Number of New Converts:</b></p>{{ wsfleaders.number_of_new_converts }}
+        <p><b>Total Attendance:</b></p>{{ wsfleaders.Total_attendace }}
+        <p><b>Leaders Comment:</b></p>{{ wsfleaders.body }}
+    </div>
+    
+    <p><a href="{% url 'wsfleaders_update_edit' wsfleaders.pk %}">Edit</a> |
+        <a href="{% url 'wsfleaders_update_delete' wsfleaders.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'wsf_report' %}">Wsf Report</a>.</p>
+</section>
+{% endblock content %}
+

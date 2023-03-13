@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <h2>{{media.title }}</h2>
+            <p>by {{media.author }} | {{media.date }}</p>
+            <h2>Testifiers Name:</h2><p>{{media.testifier_name }}</p>
+            <h2>Testimony</h2><p>{{media.body }}</p>
+    </div>
+    
+    <p><a href="{% url 'media_update_edit' media.pk %}">Edit</a> |
+        <a href="{% url 'media_update_delete' media.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'testimonies' %}">testimonies</a>.</p>
+</section>
+{% endblock content %}
+
+
+

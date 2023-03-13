@@ -1,0 +1,39 @@
+{% extends 'workers.html' %}
+{% block title %}Church Reports{% endblock title %}
+{% block content %}
+{% for umoji in object_list %}
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
+                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+            </div>
+            <div class="card-body">
+                <p><b>Total Sunday Attendance:</b></p>{{ umoji.total_sunday_attendance }}
+                <p><b>Average Sunday Attendance:</b></p>{{ umoji.avg_sunday_attendance }}
+                <p><b>Highest Sunday Attendance:</b></p>{{ umoji.highest_sunday_attendance }}
+                <p><b>Average Numer of Adults:</b></p>{{ umoji.avg_adults }}
+                <p><b>Average Number of Children:</b></p>{{ umoji.avg_children }}
+                <p><b>Average Chop Attendance:</b></p>{{ umoji.number_of_children }}
+                <p><b>Average WSF Attendance:</b></p>{{ umoji.avg_chop }}
+                <p><b>Total Believers Foundation Class Attendance:</b></p>{{ umoji.bfc }}
+                <p><b>Number of WSF Centres:</b></p>{{ umoji.no_of_wsf }}
+                <p><b>Number of First Timers:</b></p>{{ umoji.first_timers }}
+                <p><b>Number of New Converts:</b></p>{{ umoji.new_converts }}
+                <p><b>Total Income:</b></p>{{ umoji.Total_income }}
+                <p><b>Pastors's Comment:</b></p>{{ umoji.body|truncatewords:20 }}
+                <a href="{% url 'church_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'church_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'church_update_detail' umoji.pk %}">click for complete post</a>
+            </div>
+        </div>
+        <br />
+    </section>
+
+{% endfor %}
+{% endblock content %}
+
+
+
+
+
+
+

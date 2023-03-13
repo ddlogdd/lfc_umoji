@@ -1,0 +1,30 @@
+{% extends 'workers.html' %}
+{% block title %}CMC Reports{% endblock title %}
+{% block content %}
+{% for umoji in object_list %}
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ umoji.message_title }}</span> &middot;
+                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+            </div>
+            <div class="card-body">
+                <p><b>Service Sequence:</b></p>{{ umoji.service_sequence}}
+                <p><b>Number of Males:</b></p>{{ umoji.number_of_males }}
+                <p><b>Number of Females:</b></p>{{ umoji.number_of_females }}
+                <p><b>Number of Children:</b></p>{{ umoji.number_of_children }}
+                <p><b>Number of First Timers:</b></p>{{ umoji.number_of_first_timers }}
+                <p><b>Number of New Converts:</b></p>{{ umoji.number_of_new_converts }}
+                <p><b>Number of Cars:</b></p>{{ umoji.number_of_cars }}
+                <p><b>Total Attendance:</b></p>{{ umoji.Total_attendace }}
+                <p><b>Income Report:</b></p>{{ umoji.Income_report }}
+                <p><b>CMC's Comment:</b></p>{{ umoji.body|truncatewords:20 }}
+                <a href="{% url 'cmc_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'cmc_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'cmc_update_detail' umoji.pk %}">click for complete post</a>
+            </div>
+        </div>
+        <br />
+    </section>
+
+{% endfor %}
+{% endblock content %}
+

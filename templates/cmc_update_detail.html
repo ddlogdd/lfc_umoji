@@ -1,0 +1,22 @@
+{% extends 'workers.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <p>by</p> {{managementreport.author }} | {{managementreport.date }}
+        <p><b>Message Title:</b></p>{{managementreport.message_title }}
+        <p><b>Service Sequence:</b></p>{{managementreport.service_sequence}}
+        <p><b>Number of Males:</b></p>{{managementreport.number_of_males }}
+        <p><b>Number of Females:</b></p>{{managementreport.number_of_females }}
+        <p><b>Number of Children:</b></p>{{managementreport.number_of_children }}
+        <p><b>Number of First Timers:</b></p>{{managementreport.number_of_first_timers }}
+        <p><b>Number of New Converts:</b></p>{{managementreport.number_of_new_converts }}
+        <p><b>Number of New Cars:</b></p>{{managementreport.number_of_cars }}
+        <p><b>Total Attendance:</b></p>{{managementreport.Total_attendace }}
+        <p><b>Income Report:</b></p>{{ managementreport.Income_report }}
+    
+    <p><a href="{% url 'cmc_update_edit' managementreport.pk %}">Edit</a> |
+        <a href="{% url 'cmc_update_delete' managementreport.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'cmc_report' %}">CMC's Report</a>.</p>
+</section>
+{% endblock content %}
+

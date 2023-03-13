@@ -1,0 +1,28 @@
+{% extends 'workers.html' %}
+{% block title %}Wsf Reports{% endblock title %}
+{% block content %}
+{% for umoji in object_list %}
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
+                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+            </div>
+            <div class="card-body">
+            <p><b>Wsf Centre Name:</b></p>{{ umoji.wsf_centre_name }}
+            <p><b>Number of Males:</b></p>{{ umoji.number_of_males }}
+            <p><b>Number of Females:</b></p>{{ umoji.number_of_females }}
+            <p><b>Number of Children:</b></p>{{ umoji.number_of_children }}
+            <p><b>Number of First Timers:</b></p>{{ umoji.number_of_first_timers }}
+            <p><b>Number of New Converts:</b></p>{{ umoji.number_of_new_converts }}
+            <p><b>Total Attendance:</b></p>{{ umoji.Total_attendace }}
+            <p><b>Leaders Comments:</b></p>{{ umoji.body|truncatewords:20 }}
+                <a href="{% url 'wsfleaders_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'wsfleaders_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'wsfleaders_update_detail' umoji.pk %}">click for complete post</a>
+            </div>
+        </div>
+        <br />
+    </section>
+
+{% endfor %}
+{% endblock content %}
+

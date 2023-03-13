@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div class="article-entry">
+        <h2>{{ object.title }}</h2>
+            <p>by {{ object.author }} | {{ object.date }}</p>
+            <h2>Prayer Points</h2><p>{{ object.prayers }}</p>
+            <h2>Message</h2><p>{{ object.message }}</p>
+    </div>
+    
+    <p><a href="{% url 'kap_update_edit' object.pk %}">Edit</a> |
+        <a href="{% url 'kap_update_delete' object.pk %}">Delete</a></p>
+    <p>Back to <a href="{% url 'kingdom_advancement_prayers' %}">kingdom_advancement_prayers</a></p>
+</section>
+{% endblock content %}
+
+
