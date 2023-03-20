@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
-                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+                <span class="text-muted">by {{ umoji.author }}|<p><b>Post created on</b></p>{{ umoji.date }}</span>
             </div>
             <div class="card-body">
             <p><b>Wsf Centre Name:</b></p>{{ umoji.wsf_centre_name }}
@@ -17,8 +17,12 @@
             <p><b>Number of New Converts:</b></p>{{ umoji.number_of_new_converts }}
             <p><b>Total Attendance:</b></p>{{ umoji.Total_attendace }}
             <p><b>Leaders Comments:</b></p>{{ umoji.body|truncatewords:20 }}
-                <a href="{% url 'wsfleaders_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'wsfleaders_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'wsfleaders_update_detail' umoji.pk %}">click for complete post</a>
-            </div>
+            <a href="{% url 'wsfleaders_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'wsfleaders_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'wsfleaders_update_detail' umoji.pk %}">click for complete post</a>
+            {% if umoji.date != umoji.edited %}
+                <p><b>This post was edited on {{umoji.edited}}</b> </p>
+            {% endif %}
+        </div>    
+        </div>
         </div>
         <br />
     </section>

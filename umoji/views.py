@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import Announcement, Wsf, Kap, Media, WsfLeaders, ServiceReport, ManagementReport, Church
+from .forms import ChurchForm, ManagementReportForm, ServiceReportForm, WsfLeadersForm, MediaForm, KapForm, WsfForm, AnnouncementForm
 from django.urls import reverse_lazy, reverse
 
 # Create your views here.
@@ -10,197 +13,336 @@ class AnnouncementPageView(ListView):
     template_name = 'announcements.html'
     model = Announcement
 
-class WorkersPageView(TemplateView):
+class WorkersPageView(LoginRequiredMixin, TemplateView):
     template_name = 'workers.html'
+    login_url ='login'
 
-class PastorPageView(TemplateView):
+class PastorPageView(LoginRequiredMixin, TemplateView):
     template_name = 'pastor_desk.html'
+    login_url ='login'
 
-class CmcPageView(TemplateView):
+class CmcPageView(LoginRequiredMixin, TemplateView):
     template_name = 'cmc_desk.html'
+    login_url ='login'
 
 class AboutUsPageView(TemplateView):
     template_name = 'about_us.html'
 
-class InfoUpdatePageView(CreateView):
+class InfoUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'info_update.html'
     model = Announcement
-    fields = ('title', 'body', 'author')
+    form_class = AnnouncementForm
+    login_url ='login'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class InfoUpdateEditView(UpdateView): 
+class InfoUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = Announcement
-    fields = ('title', 'body',)
+    form_class = AnnouncementForm
     template_name = 'info_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
 
 class InfoUpdateDetailView(DetailView): 
     model = Announcement
     template_name = 'info_update_detail.html'
 
-class InfoUpdateDeleteView(DeleteView): # new
+class InfoUpdateDeleteView(LoginRequiredMixin, DeleteView): 
     model = Announcement
     template_name = 'info_update_delete.html'
     success_url = reverse_lazy('info_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class WsfOperationsPageView(ListView):
     template_name = 'wsf_operations.html'
     model = Wsf
-class WsfUpdatePageView(CreateView):
+class WsfUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'wsf_update.html'
     model = Wsf
-    fields = ('title', 'wsf_prayers', 'wsf_outline', 'author')
+    form_class = WsfForm
+    login_url ='login'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class WsfUpdateEditView(UpdateView): 
+class WsfUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = Wsf
-    fields = ('title', 'wsf_prayers', 'wsf_outline', 'author')
+    form_class = WsfForm
     template_name = 'wsf_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class WsfUpdateDetailView(DetailView): 
     model = Wsf
     template_name = 'wsf_update_detail.html'
 
-class WsfUpdateDeleteView(DeleteView): # new
+class WsfUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = Wsf
     template_name = 'wsf_update_delete.html'
     success_url = reverse_lazy('wsf_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class KingdomAdvancementPrayersView(ListView):
     template_name = 'kingdom_advancement_prayers.html'
     model = Kap
     
 
-class KapUpdatePageView(CreateView):
+class KapUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'kap_update.html'
     model = Kap
-    fields = ('title', 'prayers', 'message', 'author')
+    form_class = KapForm
+    login_url ='login'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class KapUpdateEditView(UpdateView): 
+class KapUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = Kap
-    fields = ('title', 'prayers', 'message', 'author')
+    form_class = KapForm
     template_name = 'kap_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class KapUpdateDetailView(DetailView): 
     model = Kap
     template_name = 'kap_update_detail.html'
 
-class KapUpdateDeleteView(DeleteView): # new
+class KapUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = Kap
     template_name = 'kap_update_delete.html'
     success_url = reverse_lazy('kap_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class TestimoniesView(ListView):
     template_name = 'testimonies.html'
     model = Media
 
-class MediaUpdatePageView(CreateView):
+class MediaUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'media_update.html'
     model = Media
-    fields = ('title', 'body', 'testifier_name', 'author')
+    login_url ='login'
+    form_class = MediaForm
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class MediaUpdateEditView(UpdateView): 
+
+class MediaUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = Media
-    fields = ('title', 'body', 'testifier_name', 'author')
+    form_class = MediaForm
     template_name = 'media_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 class MediaUpdateDetailView(DetailView): 
     model = Media
     template_name = 'media_update_detail.html'
 
-class MediaUpdateDeleteView(DeleteView): # new
+class MediaUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = Media
     template_name = 'media_update_delete.html'
     success_url = reverse_lazy('media_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class WsfReportView(ListView):
+class WsfReportView(LoginRequiredMixin, ListView):
     template_name = 'wsf_report.html'
     model = WsfLeaders
+    login_url ='login'
 
-class WsfLeadersUpdatePageView(CreateView):
+class WsfLeadersUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'wsf_leaders_update.html'
     model = WsfLeaders
-    fields = ('title', 'body', 'wsf_centre_name', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author')
-
-class WsfLeadersUpdateEditView(UpdateView): 
+    login_url ='login'
+    form_class = WsfLeadersForm
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+class WsfLeadersUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = WsfLeaders
-    fields = ('title', 'body', 'wsf_centre_name', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author')
+    form_class = WsfLeadersForm
     template_name = 'wsf_leaders_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class WsfLeadersUpdateDetailView(DetailView): 
+class WsfLeadersUpdateDetailView(LoginRequiredMixin, DetailView): 
     model = WsfLeaders
     template_name = 'wsfleaders_update_detail.html'
+    login_url ='login'
 
-class WsfLeadersUpdateDeleteView(DeleteView): # new
+class WsfLeadersUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = WsfLeaders
     template_name = 'wsf_leaders_update_delete.html'
     success_url = reverse_lazy('wsf_leaders_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class UshersReportView(ListView): 
+class UshersReportView(LoginRequiredMixin, ListView): 
     template_name = 'ushers_report.html'
     model = ServiceReport
+    login_url ='login'
 
-class UshersUpdatePageView(CreateView):
+class UshersUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'ushers_update.html'
     model = ServiceReport
-    fields = ( 'body', 'Income_report', 'message_title', 'service_sequence', 'number_of_cars', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author')
-
-class UshersUpdateEditView(UpdateView): 
+    form_class = ServiceReportForm
+    login_url ='login'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+class UshersUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = ServiceReport
-    fields = ( 'body', 'Income_report', 'message_title', 'service_sequence', 'number_of_cars', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author')
+    form_class = ServiceReportForm
     template_name = 'ushers_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class UshersUpdateDetailView(DetailView): 
+class UshersUpdateDetailView(LoginRequiredMixin, DetailView): 
     model = ServiceReport
     template_name = 'ushers_update_detail.html'
+    login_url ='login'
 
-class UshersUpdateDeleteView(DeleteView): # new
+class UshersUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = ServiceReport
     template_name = 'ushers_update_delete.html'
     success_url = reverse_lazy('ushers_update')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class CmcReportView(ListView): 
+class CmcReportView(LoginRequiredMixin, ListView): 
     template_name = 'cmc_report.html'
     model = ManagementReport
+    login_url ='login'
 
-class CmcUpdatePageView(CreateView):
+class CmcUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'cmc_updates.html'
     model = ManagementReport
-    fields = ( 'body', 'Income_report', 'message_title', 'service_sequence', 'number_of_cars', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author',)
-
-class CmcUpdateEditView(UpdateView): 
+    login_url ='login'
+    form_class = ManagementReportForm
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+class CmcUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = ManagementReport
-    fields = ( 'body', 'Income_report', 'message_title', 'service_sequence', 'number_of_cars', 'number_of_males', 'number_of_females', 'number_of_children', 'number_of_first_timers', 'number_of_new_converts', 'Total_attendace', 'author',)
+    form_class = ManagementReportForm
     template_name = 'cmc_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class CmcUpdateDetailView(DetailView): 
+class CmcUpdateDetailView(LoginRequiredMixin, DetailView): 
     model = ManagementReport
     template_name = 'cmc_update_detail.html'
+    login_url ='login'
 
-class CmcUpdateDeleteView(DeleteView): # new
+class CmcUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = ManagementReport
     template_name = 'cmc_update_delete.html'
     success_url = reverse_lazy('cmc_updates')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class ChurchReportView(ListView): 
+class ChurchReportView(LoginRequiredMixin, ListView): 
     template_name = 'church_report.html'
     model = Church
+    login_url ='login'
 
-class ChurchUpdatePageView(CreateView):
+class ChurchUpdatePageView(LoginRequiredMixin, CreateView):
     template_name = 'church_updates.html'
+    login_url ='login'
     model = Church
-    fields = ('title', 'body', 'total_sunday_attendance', 'avg_sunday_attendance',   'avg_adults', 'avg_children', 'avg_chop', 'avg_wsf', 'no_of_wsf', 'bfc', 'highest_sunday_attendance', 'first_timers', 'new_converts', 'Total_income', 'author')
+    form_class = ChurchForm
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
 
-class ChurchUpdateEditView(UpdateView): 
+class ChurchUpdateEditView(LoginRequiredMixin, UpdateView): 
     model = Church
-    fields = ( 'title', 'body', 'total_sunday_attendance', 'avg_sunday_attendance',   'avg_adults', 'avg_children', 'avg_chop', 'avg_wsf', 'no_of_wsf', 'bfc', 'highest_sunday_attendance', 'first_timers', 'new_converts', 'Total_income', 'author')
+    form_class = ChurchForm
     template_name = 'church_update_edit.html'
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
-class ChurchUpdateDetailView(DetailView): 
+class ChurchUpdateDetailView(LoginRequiredMixin, DetailView): 
     model = Church
     template_name = 'church_update_detail.html'
+    login_url ='login'
 
-class ChurchUpdateDeleteView(DeleteView): # new
+class ChurchUpdateDeleteView(LoginRequiredMixin, DeleteView): # new
     model = Church
     template_name = 'church_update_delete.html'
     success_url = reverse_lazy('church_updates')
+    login_url ='login'
+    def dispatch(self, request, *args, **kwargs): 
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
 

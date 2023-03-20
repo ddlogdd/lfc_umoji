@@ -6,12 +6,15 @@
         <div class="card">
             <div class="card-header">
                 <span class="font-weight-bold">{{ umoji.title }}</span> &middot;
-                <span class="text-muted">by {{ umoji.author }}|{{ umoji.date }}</span>
+                <span class="text-muted">by {{ umoji.author }}|<p><b>Post created on</b></p>{{ umoji.date }}</span>
             </div>
             <div class="card-body">
                 <p><b>Total Sunday Attendance:</b></p>{{ umoji.total_sunday_attendance }}
                 <p><b>Average Sunday Attendance:</b></p>{{ umoji.avg_sunday_attendance }}
                 <p><b>Highest Sunday Attendance:</b></p>{{ umoji.highest_sunday_attendance }}
+                <p><b>Total midweek Attendance:</b></p>{{ umoji.total_midweek_attendance }}
+                <p><b>Average midweek Attendance:</b></p>{{ umoji.avg_midweek_attendance }}
+                <p><b>Highest midweek Attendance:</b></p>{{ umoji.highest_midweek_attendance }}
                 <p><b>Average Numer of Adults:</b></p>{{ umoji.avg_adults }}
                 <p><b>Average Number of Children:</b></p>{{ umoji.avg_children }}
                 <p><b>Average Chop Attendance:</b></p>{{ umoji.number_of_children }}
@@ -23,6 +26,9 @@
                 <p><b>Total Income:</b></p>{{ umoji.Total_income }}
                 <p><b>Pastors's Comment:</b></p>{{ umoji.body|truncatewords:20 }}
                 <a href="{% url 'church_update_edit' umoji.pk %}">Edit</a> | <a href="{% url 'church_update_delete' umoji.pk %}">Delete</a>| <a href="{% url 'church_update_detail' umoji.pk %}">click for complete post</a>
+            {% if umoji.date != umoji.edited %}
+                <p><b>This post was edited on {{umoji.edited}}</b> </p>
+            {% endif %}
             </div>
         </div>
         <br />
@@ -30,7 +36,6 @@
 
 {% endfor %}
 {% endblock content %}
-
 
 
 
