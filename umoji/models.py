@@ -30,6 +30,7 @@ class Wsf(models.Model):
     get_user_model(),
     on_delete=models.CASCADE,
     )
+    
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -68,6 +69,11 @@ class ServiceReport(models.Model):
     get_user_model(),
     on_delete=models.CASCADE, 
     )
+    class Meta: # new
+        permissions = [
+        ('ushers', 'for ushers'),
+        ('ushers alone', 'only ushers')
+                ]
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -93,6 +99,10 @@ class ManagementReport(models.Model):
     get_user_model(),
     on_delete=models.CASCADE,
     )
+    class Meta: # new
+        permissions = [
+        ('elder', 'for cmc'), ('access', 'can access cmc')
+                ]
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -114,6 +124,11 @@ class WsfLeaders(models.Model):
     get_user_model(),
     on_delete=models.CASCADE,
     )
+    class Meta: # new
+        permissions = [
+        ('special_status', 'Can read all books'),
+        ('special', 'only wsf')
+                ]
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -129,6 +144,10 @@ class Media(models.Model):
     get_user_model(),
     on_delete=models.CASCADE,
     )
+    class Meta: # new
+        permissions = [
+        ('media', 'for media'),
+                ]
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -158,6 +177,11 @@ class Church(models.Model):
     get_user_model(),
     on_delete=models.CASCADE,
     )
+    class Meta: # new
+        permissions = [
+        ('pastor', 'Can acess pastor'),
+         ('pastor alone', 'only pastor')
+                ]
     def __str__(self):
         return self.title
     def get_absolute_url(self):
